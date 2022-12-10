@@ -1,7 +1,10 @@
 import processing.core.PApplet;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class App extends PApplet {
-    Drop drop;
+    List<Drop> drops = new ArrayList<>();
 
     @Override
     public void settings() {
@@ -10,13 +13,24 @@ public class App extends PApplet {
 
     @Override
     public void setup() {
-        drop = new Drop(width, height);
     }
 
     @Override
     public void draw() {
-        drop.fly();
+        if (drops.size() < 400) {
+            drops.add(new Drop(width, height));
+        }
+
+        for (Drop d : drops) {
+            d.fly();
+            if (d.y > height) {
+                d.y = -d.height;
+            }
+        }
+
         background(color(33, 33, 33));
-        drop.draw(this);
+        for (Drop d : drops) {
+            d.draw(this);
+        }
     }
 }

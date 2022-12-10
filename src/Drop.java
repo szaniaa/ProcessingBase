@@ -7,12 +7,12 @@ public class Drop {
     public float height;
     public float velocity;
 
-    public Drop(float windowX, float windowY) {
-        x = (float) (Math.random() * windowX);
+    public Drop(float windowWidth, float windowHeight) {
+        x = (float) (Math.random() * windowWidth);
         y = 0f;
-        width = 0.01f * windowX;
+        width = 0.01f * windowWidth;
         height = width * 3f;
-        velocity = windowY / 120f;
+        velocity = windowHeight / 120f + (windowHeight / 120f / 1.7734f) * (float) Math.random();
     }
 
     public void draw(PApplet app) {
@@ -23,5 +23,4 @@ public class Drop {
     public void fly() {
         y += velocity;
     }
-
 }
